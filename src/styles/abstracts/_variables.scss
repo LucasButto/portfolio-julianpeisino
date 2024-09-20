@@ -1,0 +1,23 @@
+/////// Fuentes ///////
+
+.urbanist {
+  font-family: var(--font-urbanist);
+}
+
+.oxygen {
+  font-family: var(--font-oxygen);
+}
+
+/////// Colores ///////
+$base-color-negro: #000000;
+$base-color-blanco: #ffffff;
+
+/////// Tamaños pantallas ///////
+
+$screen-monitor-xl: 2160px;
+$screen-monitor-l: 1920px;
+$screen-monitor-m: 1440px;
+$screen-monitor-sm: 1080px;
+$screen-monitor-s: 1024px;
+$screen-tablet: 768px;
+$screen-semi-tablet: 680px;
