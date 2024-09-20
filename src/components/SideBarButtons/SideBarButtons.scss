@@ -1,0 +1,40 @@
+.sidebar-buttons-container {
+  position: fixed;
+  top: 0;
+  right: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  width: auto;
+  height: 100%;
+  z-index: 100;
+
+  a {
+    text-decoration: none;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 400;
+    transition: background-color 0.5s;
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+
+  .selected {
+    border: 1px solid #000000;
+    background-color: #e0e0e0;
+    color: black;
+  }
+}
