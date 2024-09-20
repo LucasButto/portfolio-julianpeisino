@@ -3,21 +3,24 @@ nav {
   top: 0;
   width: 100%;
   background-color: transparent;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(4px);
   color: white;
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
   ul {
     display: flex;
     list-style: none;
-    gap: 200px;
+    gap: 150px;
   }
   a {
     color: rgb(242, 242, 242);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 400;
+    font-size: 20px;
   }
   a:hover {
     color: #ccc;
