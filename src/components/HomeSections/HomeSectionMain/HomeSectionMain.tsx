@@ -3,11 +3,11 @@ import "./HomeSectionMain.scss";
 
 const HomeSectionMain = () => {
   return (
-    <section className="home-section-container">
-      <div className="left-container"></div>
-      <div className="right-container">
+    <section className="home-section-container projects-main">
+      <div className="left-container">
         <span>DESDE TU IMAGINACIÓN A LA REALIDAD</span>
       </div>
+      <div className="right-container"></div>
     </section>
   );
 };
