@@ -68,3 +68,24 @@
     }
   }
 }
+
+@media (width <= 1536px) {
+  .home-section-container {
+    .right-container {
+      .project-container {
+        padding-right: 100px;
+        top: 0;
+
+        & > p {
+          font-size: 80px;
+        }
+        & > span {
+          font-size: 80px;
+        }
+        & > a {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+}
