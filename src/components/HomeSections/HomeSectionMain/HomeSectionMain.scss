@@ -1,4 +1,4 @@
-.home-section-container {
+.home-section-container-main {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -26,7 +26,6 @@
     align-items: center;
     width: 50%;
     height: 100%;
-    color: white;
     text-align: right;
 
     span {
@@ -37,6 +36,19 @@
       text-align: left;
       font-weight: 800;
       font-size: 110px;
+      color: white;
+      //text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.9);
+    }
+  }
+}
+
+@media (width <= 1536px) {
+  .home-section-container-main {
+    .left-container {
+      span {
+        left: 150px;
+        font-size: 80px;
+      }
     }
   }
 }
