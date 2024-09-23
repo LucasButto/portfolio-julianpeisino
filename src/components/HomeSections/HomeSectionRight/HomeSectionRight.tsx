@@ -4,15 +4,24 @@ import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 
 import "./HomeSectionRight.scss";
 
-const HomeSectionRight = () => {
+const HomeSectionRight = ({
+  projectId,
+  projectTitle,
+}: {
+  projectId: string;
+  projectTitle: string;
+}) => {
   return (
-    <section className="home-section-container projects-viviendas">
+    <section
+      className={`home-section-container projects-${projectId}`}
+      id={projectId}
+    >
       <div className="left-container"></div>
       <div className="right-container">
         <div className="project-container">
           <p>PROYECTOS</p>
-          <span>VIVIENDAS</span>
-          <Link href="/viviendas">
+          <span>{projectTitle}</span>
+          <Link href={`/proyectos-${projectId}`}>
             Ver Proyectos
             <ArrowForwardRoundedIcon />
           </Link>
