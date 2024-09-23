@@ -34,7 +34,7 @@ nav {
   }
 
   .show-nav {
-    display: flex;
+    // display: flex;
     animation: showNav 0.5s forwards;
   }
 
@@ -45,10 +45,14 @@ nav {
 
   @keyframes showNav {
     0% {
+      display: none;
       transform: translateY(-100%);
+      opacity: 0;
     }
     100% {
+      display: flex;
       transform: translateY(0);
+      opacity: 1;
     }
   }
 
