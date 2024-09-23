@@ -36,10 +36,18 @@ main::-webkit-scrollbar {
   &-viviendas {
     background-image: url("/img/background/projects-viviendas.webp");
   }
-  &-comerciales {
-    background-image: url("/img/background/projects-comerciales.webp");
+  &-comercial {
+    background-image: url("/img/background/projects-comercial.webp");
   }
   &-deptosph {
     background-image: url("/img/background/projects-deptosph.webp");
   }
+}
+
+.info-background {
+  background-image: url("/img/background/info.webp");
+}
+
+.contact-background {
+  background-image: url("/img/background/contact.webp");
 }
