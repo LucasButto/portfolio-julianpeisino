@@ -1,8 +1,8 @@
 import React from "react";
 
-import "./Contact.scss";
+import "./HomeSectionContact.scss";
 
-const Contact = () => {
+const HomeSectionContact = () => {
   return (
     <section
       className="home-section-container-contact contact-background"
@@ -27,4 +27,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default HomeSectionContact;

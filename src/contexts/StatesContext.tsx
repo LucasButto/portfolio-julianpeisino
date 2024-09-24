@@ -1,40 +1,38 @@
 "use client";
-import {
-  useState,
-  createContext,
-  ReactNode,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { ReactNode, createContext, useContext, useState } from "react";
 
-// Definimos el tipo del contexto
 interface StatesContextType {
   stateSideBar: number;
-  setStateSideBar: Dispatch<SetStateAction<number>>;
+  setStateSideBar: React.Dispatch<React.SetStateAction<number>>;
 }
 
-// Tipamos el contexto para evitar el error de "no arguments"
-const StatesContext = createContext<StatesContextType | undefined>(undefined);
+const StatesContext = createContext<StatesContextType | null>(null);
 
-// Definimos el tipo de `children` que debe ser un ReactNode
 interface StatesProviderProps {
   children: ReactNode;
 }
 
-const StatesProvider = ({ children }: StatesProviderProps) => {
+export const StatesProvider = ({ children }: StatesProviderProps) => {
   const [stateSideBar, setStateSideBar] = useState<number>(1);
 
+  const contextValues: StatesContextType = {
+    stateSideBar,
+    setStateSideBar,
+  };
+
   return (
-    <StatesContext.Provider
-      value={{
-        stateSideBar,
-        setStateSideBar,
-      }}
-    >
+    <StatesContext.Provider value={contextValues}>
       {children}
     </StatesContext.Provider>
   );
 };
 
-export { StatesProvider };
-export default StatesContext;
+export const useStatesContext = () => {
+  const context = useContext(StatesContext);
+
+  if (!context) {
+    throw new Error("useStatesContext must be used within a StatesProvider");
+  }
+
+  return context;
+};

@@ -34,12 +34,12 @@ nav {
   }
 
   .show-nav {
-    // display: flex;
+    display: flex;
     animation: showNav 0.5s forwards;
   }
 
   .hide-nav {
-    //display: none;
+    display: none;
     animation: hideNav 0.5s forwards;
   }
 
@@ -69,16 +69,17 @@ nav {
     }
   }
 
-  a {
-    color: rgb(242, 242, 242);
-    text-decoration: none;
+  button {
+    background-color: transparent;
+    border: none;
+    color: #f2f2f2;
     font-weight: 400;
     font-size: 20px;
+    cursor: pointer;
     text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.9);
-  }
-
-  a:hover {
-    color: #ccc;
+    &:hover {
+      color: #ccc;
+    }
   }
 }
 

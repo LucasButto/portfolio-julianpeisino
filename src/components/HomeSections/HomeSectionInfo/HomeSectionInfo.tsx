@@ -1,8 +1,8 @@
 import React from "react";
 
-import "./StudyInfo.scss";
+import "./HomeSectionInfo.scss";
 
-const StudyInfo = () => {
+const HomeSectionInfo = () => {
   return (
     <section
       className="home-section-container-study info-background"
@@ -14,4 +14,4 @@ const StudyInfo = () => {
   );
 };
 
-export default StudyInfo;
+export default HomeSectionInfo;
