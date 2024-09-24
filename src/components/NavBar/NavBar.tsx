@@ -1,11 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
+import { useStatesContext } from "@/contexts/StatesContext";
+
 import "./NavBar.scss";
 
 const NavBar = () => {
   const [isHovering, setIsHovering] = useState(false);
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
+  const { setStateSideBar } = useStatesContext();
 
   const handleMouseEnterProjects = () => {
     clearTimeout(timeoutId as NodeJS.Timeout); // Limpiar cualquier temporizador existente
@@ -31,19 +34,19 @@ const NavBar = () => {
           <Image src="/img/logo.webp" alt="logo" width={191} height={63} />
           <ul>
             <li>
-              <a href="#home">Home</a>
+              <button onClick={() => setStateSideBar(1)}>Home</button>
             </li>
             <li
               onMouseEnter={handleMouseEnterProjects}
               onMouseLeave={handleMouseLeaveProjects}
             >
-              <a href="#projectos">Proyectos</a>
+              <button onClick={() => setStateSideBar(2)}>Proyectos</button>
             </li>
             <li>
-              <a href="#info">Portfolio</a>
+              <button onClick={() => setStateSideBar(5)}>Portfolio</button>
             </li>
             <li>
-              <a href="#contacto">Contacto</a>
+              <button onClick={() => setStateSideBar(6)}>Contacto</button>
             </li>
           </ul>
         </div>
@@ -53,13 +56,13 @@ const NavBar = () => {
           onMouseLeave={handleMouseLeaveProjects}
         >
           <li>
-            <a href="#proyecto1">Viviendas</a>
+            <button onClick={() => setStateSideBar(2)}>Viviendas</button>
           </li>
           <li>
-            <a href="#proyecto2">Deptos Ph</a>
+            <button onClick={() => setStateSideBar(3)}>Deptos Ph</button>
           </li>
           <li>
-            <a href="#proyecto3">Comercial</a>
+            <button onClick={() => setStateSideBar(4)}>Comercial</button>
           </li>
         </ul>
       </nav>
