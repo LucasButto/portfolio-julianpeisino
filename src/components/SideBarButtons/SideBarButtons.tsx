@@ -1,16 +1,12 @@
 "use client";
-import { useContext, useEffect } from "react";
-import StatesContext from "@/contexts/StatesContext";
+import { useEffect, useCallback, useRef, useState } from "react";
+import { useStatesContext } from "@/contexts/StatesContext";
 import "./SideBarButtons.scss";
 
 const SideBarButtons = () => {
-  const context = useContext(StatesContext);
-
-  if (!context) {
-    throw new Error("SideBarButtons must be used within a StatesProvider");
-  }
-
-  const { stateSideBar, setStateSideBar } = context;
+  const { stateSideBar, setStateSideBar } = useStatesContext();
+  const lastChangeTimeRef = useRef<number>(0);
+  const [screenHeight, setScreenHeight] = useState(0);
 
   const buttons = [
     { name: "home", id: 1 },
@@ -21,79 +17,69 @@ const SideBarButtons = () => {
     { name: "contacto", id: 6 },
   ];
 
-  const handleScroll = (event: WheelEvent) => {
-    event.preventDefault();
-    const delta = event.deltaY;
+  const handleScroll = useCallback(
+    (event: WheelEvent) => {
+      const delta = event.deltaY;
+      const currentTime = Date.now();
 
-    // Calcula el nuevo índice basado en el scroll
-    let newIndex;
-    if (delta < 0) {
-      // Si se desplaza hacia arriba
-      newIndex = stateSideBar - 1 < 1 ? buttons.length : stateSideBar - 1;
-    } else {
-      // Si se desplaza hacia abajo
-      newIndex = stateSideBar + 1 > buttons.length ? 1 : stateSideBar + 1;
-    }
+      // Limita los cambios a un máximo de uno por segundo
+      if (currentTime - lastChangeTimeRef.current < 1000) {
+        return;
+      }
 
-    // si el indice es el primero o el último, scroll al final o al principio
-    if (newIndex === 1) {
-      document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
-    } else if (newIndex === buttons.length) {
-      document
-        .getElementById("contacto")
-        ?.scrollIntoView({ behavior: "smooth" });
-    }
+      lastChangeTimeRef.current = currentTime;
 
-    setStateSideBar(newIndex);
-  };
+      // Calcula el nuevo índice basado en el scroll
+      let newIndex;
+      if (delta < 0) {
+        newIndex = stateSideBar - 1 < 1 ? buttons.length : stateSideBar - 1;
+      } else {
+        newIndex = stateSideBar + 1 > buttons.length ? 1 : stateSideBar + 1;
+      }
+      setStateSideBar(newIndex);
+    },
+    [stateSideBar, setStateSideBar, buttons.length]
+  );
 
-  // Agrega el listener de scroll cuando el componente se monta
   useEffect(() => {
     window.addEventListener("wheel", handleScroll);
 
-    // Limpia el listener cuando el componente se desmonta
     return () => {
       window.removeEventListener("wheel", handleScroll);
     };
-  }, [stateSideBar]);
+  }, [handleScroll]);
 
-  // Función para manejar el scroll smooth sin que scroll-snap interfiera
-  const handleSmoothScroll = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    targetId: string
-  ) => {
-    e.preventDefault();
+  useEffect(() => {
+    // Solo se ejecuta en el cliente
+    if (typeof window !== "undefined") {
+      setScreenHeight(window.innerHeight);
 
-    const mainElement = document.querySelector("main");
-    const targetElement = document.getElementById(targetId);
-    if (mainElement && targetElement) {
-      // Deshabilita scroll-snap temporalmente
-      mainElement.style.scrollSnapType = "none";
+      const handleResize = () => setScreenHeight(window.innerHeight);
+      window.addEventListener("resize", handleResize);
 
-      // Scroll suave al destino
-      targetElement.scrollIntoView({ behavior: "smooth" });
-
-      // Vuelve a habilitar scroll-snap después de un breve tiempo
-      setTimeout(() => {
-        mainElement.style.scrollSnapType = "y mandatory";
-      }, 1500); // Ajusta el tiempo si es necesario
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
     }
-  };
+  }, []);
 
   return (
-    <div className="sidebar-buttons-container">
+    <div
+      className="sidebar-buttons-container"
+      style={{
+        transform: `translate(0,${screenHeight * (stateSideBar - 1)}px)`,
+      }}
+    >
       {buttons.map((item) => (
-        <a
+        <button
           key={item.id}
-          onClick={(e) => {
+          onClick={() => {
             setStateSideBar(item.id);
-            handleSmoothScroll(e, item.name);
           }}
           className={`${stateSideBar === item.id ? "selected" : ""}`}
-          href={`#${item.name}`}
         >
           {item.id}
-        </a>
+        </button>
       ))}
     </div>
   );
