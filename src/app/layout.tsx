@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-
 import NavBar from "@/components/NavBar/NavBar";
 import "@/styles/globals.scss";
 
 import { Oxygen, Urbanist } from "next/font/google";
-import WhatsAppFloatingIcon from "@/components/WhatsAppFloatingIcon/WhatsAppFloatingIcon";
 import { StatesProvider } from "@/contexts/StatesContext";
+import WhatsAppFloatingIcon from "@/components/WhatsAppFloatingIcon/WhatsAppFloatingIcon";
+import PathnameHandler from "@/utils/PathnameHandler";
 
 export const metadata: Metadata = {
   title: "Arquitecto - Julian Peisino",
@@ -39,6 +39,7 @@ export default function RootLayout({
       </head>
       <body className={urbanist_font.variable + " " + oxygen_font.variable}>
         <StatesProvider>
+          <PathnameHandler />
           <NavBar />
           {children}
           <WhatsAppFloatingIcon />
