@@ -13,7 +13,7 @@ const WhatsAppFloatingIcon = () => {
         target="_blank"
         passHref
       >
-        <Image src="/img/Wpp.webp" alt="WhatsApp" width={35} height={35} />
+        <Image src="/img/Wpp.webp" alt="WhatsApp" width={40} height={40} />
       </Link>
     </div>
   );

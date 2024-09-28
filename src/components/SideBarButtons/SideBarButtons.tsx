@@ -1,12 +1,11 @@
 "use client";
-import { useEffect, useCallback, useRef, useState } from "react";
+import { useEffect, useCallback, useRef } from "react";
 import { useStatesContext } from "@/contexts/StatesContext";
 import "./SideBarButtons.scss";
 
 const SideBarButtons = () => {
   const { stateSideBar, setStateSideBar } = useStatesContext();
   const lastChangeTimeRef = useRef<number>(0);
-  const [screenHeight, setScreenHeight] = useState(0);
 
   const buttons = [
     { name: "home", id: 1 },
@@ -23,7 +22,7 @@ const SideBarButtons = () => {
       const currentTime = Date.now();
 
       // Limita los cambios a un máximo de uno por segundo
-      if (currentTime - lastChangeTimeRef.current < 1000) {
+      if (currentTime - lastChangeTimeRef.current < 500) {
         return;
       }
 
@@ -49,27 +48,8 @@ const SideBarButtons = () => {
     };
   }, [handleScroll]);
 
-  useEffect(() => {
-    // Solo se ejecuta en el cliente
-    if (typeof window !== "undefined") {
-      setScreenHeight(window.innerHeight);
-
-      const handleResize = () => setScreenHeight(window.innerHeight);
-      window.addEventListener("resize", handleResize);
-
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
-    }
-  }, []);
-
   return (
-    <div
-      className="sidebar-buttons-container"
-      style={{
-        transform: `translate(0,${screenHeight * (stateSideBar - 1)}px)`,
-      }}
-    >
+    <div className="sidebar-buttons-container">
       {buttons.map((item) => (
         <button
           key={item.id}
