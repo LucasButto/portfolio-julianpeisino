@@ -1,0 +1,52 @@
+.image-grid {
+  display: grid;
+  grid-template-areas:
+    "div1 div1 div2 div3"
+    "div1 div1 div4 div5"
+    "div6 div7 div10 div10"
+    "div8 div9 div10 div10";
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  width: 100%;
+  gap: 30px;
+  padding: 30px;
+
+  div {
+    position: relative; // Necesario para que la imagen con 'fill' funcione
+    aspect-ratio: 16/9;
+    display: grid;
+    place-items: center;
+
+    // Asignación de background-color y grid-area
+    &.div1 {
+      grid-area: div1;
+    }
+    &.div2 {
+      grid-area: div2;
+    }
+    &.div3 {
+      grid-area: div3;
+    }
+    &.div4 {
+      grid-area: div4;
+    }
+    &.div5 {
+      grid-area: div5;
+    }
+    &.div6 {
+      grid-area: div6;
+    }
+    &.div7 {
+      grid-area: div7;
+    }
+    &.div8 {
+      grid-area: div8;
+    }
+    &.div9 {
+      grid-area: div9;
+    }
+    &.div10 {
+      grid-area: div10;
+    }
+  }
+}
