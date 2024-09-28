@@ -6,14 +6,13 @@ import HomeSectionMain from "@/components/HomeSections/HomeSectionMain/HomeSecti
 import HomeSectionRight from "@/components/HomeSections/HomeSectionRight/HomeSectionRight";
 import HomeSectionLeft from "@/components/HomeSections/HomeSectionLeft/HomeSectionLeft";
 import HomeSectionContact from "@/components/HomeSections/HomeSectionContact/HomeSectionContact";
-import HomeSectionInfo from "@/components/HomeSections/HomeSectionInfo/HomeSectionInfo";
 
 import { useStatesContext } from "@/contexts/StatesContext";
 
 import "./HomeSections.scss";
 
 const HomeSections = () => {
-  const { stateSideBar } = useStatesContext();
+  const { stateSideBar, setStateSideBar } = useStatesContext();
   const [screenHeight, setScreenHeight] = useState(0);
 
   useEffect(() => {
@@ -31,18 +30,25 @@ const HomeSections = () => {
     }
   }, []);
 
+  useEffect(() => {
+    window.scrollTo({
+      behavior: "smooth",
+      top: screenHeight * (stateSideBar - 1),
+    });
+  }, [stateSideBar, setStateSideBar, screenHeight]);
+
   return (
-    <main
-      style={{
-        transform: `translate(0,-${screenHeight * (stateSideBar - 1)}px)`,
-      }}
-    >
+    <main>
       <SideBarButtons />
       <HomeSectionMain />
       <HomeSectionRight projectId="viviendas" projectTitle="VIVIENDAS" />
       <HomeSectionLeft projectId="deptosph" projectTitle="DEPTOS PH" />
       <HomeSectionRight projectId="comercial" projectTitle="COMERCIAL" />
-      <HomeSectionInfo />
+      <HomeSectionLeft
+        study={true}
+        projectId="estudio"
+        projectTitle="JULIAN PEISINO"
+      />
       <HomeSectionContact />
     </main>
   );

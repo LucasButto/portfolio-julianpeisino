@@ -7,23 +7,40 @@ import "./HomeSectionLeft.scss";
 const HomeSectionLeft = ({
   projectId,
   projectTitle,
+  study,
 }: {
   projectId: string;
   projectTitle: string;
+  study?: boolean;
 }) => {
   return (
     <section
-      className={`home-section-container projects-${projectId}`}
+      className={`home-section-container ${
+        study ? "info-background" : `projects-${projectId}`
+      }`}
       id={projectId}
     >
       <div className="left-container">
         <div className="project-container">
-          <p>{projectTitle}</p>
-          <span>DEPTOS PH</span>
-          <Link href={`/proyectos-${projectId}`}>
-            Ver Proyectos
-            <ArrowForwardRoundedIcon />
-          </Link>
+          <p>{study ? "ESTUDIO" : "PROYECTOS"}</p>
+          <span>{projectTitle}</span>
+          {!study ? (
+            <Link href={`/proyectos-${projectId}`}>
+              Ver Proyectos
+              <ArrowForwardRoundedIcon />
+            </Link>
+          ) : (
+            <>
+              <Link href={`/estudio`}>
+                Sobre Mi Estudio
+                <ArrowForwardRoundedIcon />
+              </Link>
+              <Link href={`/clientes`}>
+                Ver Clientes
+                <ArrowForwardRoundedIcon />
+              </Link>
+            </>
+          )}
         </div>
       </div>
       <div className="right-container"></div>
